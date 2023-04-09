@@ -1,7 +1,7 @@
 
 # <p align="center">Restaurant E-commerce Web Application</p>
 # Abstract
-This project involves building a web application that is dedicated to restaurants. The application will enable restaurant owners to list their foods, take orders, and deliver them to their customers.
+&emsp;&emsp;This project involves building a web application that is dedicated to restaurants. The application will enable restaurant owners to list their foods, take orders, and deliver them to their customers.
 # Software requirements
 - Operating System: Any modern operating system that can run a web browser
 - Web Browser: Google Chrome, Mozilla Firefox, Safari, Microsoft Edge, etc…
