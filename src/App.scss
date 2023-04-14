@@ -1,0 +1,139 @@
+$cont_bgc: rgba(220, 20, 60, 0.9);
+$form_accent: crimson;
+
+html, body, #root, .App{
+  height:100%;
+}
+
+.container{
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  background-color: $cont_bgc;
+  justify-content: center;
+  overflow: scroll;
+  // for firefox
+  scrollbar-width: none;
+  // for chrome
+  &::-webkit-scrollbar{
+    width: 0px;
+    display: none;
+  }
+
+  .wrapper{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 60px;
+    border-radius: 10px;
+    gap:10px;
+    align-items: center;
+    filter: drop-shadow(0 0 10px );
+
+    .logo{
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .title{
+      font-size: 12px;
+    }
+
+    form{
+      display: flex;
+      flex-direction: column;
+      gap:15px;
+
+      input{
+        border:none;
+        outline: none;
+        padding: 10px;
+        border-bottom: 1px solid $cont_bgc;
+        
+        &::placeholder{
+          font-size: 1.2em;
+        }
+        &:focus::placeholder{
+          color: $cont_bgc;
+        }
+        &[type=number]{
+          -moz-appearance: textfield;
+        }
+      }
+      
+      label{
+        display:flex;
+        gap:10px;
+        align-items: center;
+        font-size: 12px;
+        cursor: pointer;
+        color: $cont_bgc;
+      }
+
+      button{
+        border: none;
+        cursor: pointer;
+        width: 250px;
+        padding: 10px;
+        font-weight: bold;
+        color:white;
+        background-color: crimson;
+        border-radius: 10px;
+      }
+    }
+    a{
+      text-decoration: none;
+      color: $form_accent;
+      font-weight: 600;
+    }
+  }
+}
+
+.home{
+  display: grid;
+  grid-template-columns:auto 1fr;
+  grid-template-rows: auto 1fr;
+  background-color: $cont_bgc;
+  height:100vh;
+}
+
+.topbar{
+  background-color: #fff;
+  grid-column: 1/-1;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color:$form_accent;
+  filter: drop-shadow(0 0 10px grey);
+  >.title{
+    margin: auto;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  >img{
+    cursor: pointer;
+  }
+}
+.sidebar{
+  background-color: #fff;
+  padding:15px 10px;
+  display: flex;
+  flex-direction: column;
+  gap:30px;
+  grid-row: 2/3;
+  img{
+    height:25px;
+    width:25px;
+    cursor: pointer;
+  }
+  .settingIcon{
+    margin-top: auto;
+  }
+}
+.body{
+  border-radius: 20px;
+  background-color: #fff;
+  margin: 20px 10px;
+  filter:drop-shadow(0 0 5px);
+}
