@@ -7,7 +7,7 @@ function Home(props){
   return <div className="home">
       <Topbar />
       <Sidebar />
-      <Body />
+      {props.body}
   </div>
 }
 

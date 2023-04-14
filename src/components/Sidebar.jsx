@@ -7,12 +7,18 @@ import FoodMenus from '../pages/FoodMenus'
 
 function Sidebar(props) {
   return ( <div className="sidebar">
-    <img src={homeIcon} />
-    <img src={dashboardIcon} />
+    <Link to='../'>
+      <img src={homeIcon} />
+    </Link>
+    <Link to='../dashboard'>
+      <img src={dashboardIcon} />
+    </Link>
     <Link to='../foodmenus'>
       <img src={foodmenuIcon} />
     </Link>
-    <img className="settingIcon" src={settingIcon} />
+    <Link className="settingIcon" to='../settings'>
+      <img src={settingIcon} />
+    </Link>
   </div> );
 }
 
