@@ -16,7 +16,7 @@ function Sidebar(props) {
     <Link to='../foodmenus'>
       <img src={foodmenuIcon} />
     </Link>
-    <Link className="settingIcon" to='../settings'>
+    <Link to='../settings'>
       <img src={settingIcon} />
     </Link>
   </div> );
