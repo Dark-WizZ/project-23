@@ -1,28 +1,34 @@
 import addProfilePic from '../images/add_profile_picture.png'
 import cancelIcon from '../images/cancel.png'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { AddItemContext } from '../context/AddItemContext'
+import { ItemEditContext } from '../context/ItemEditContext'
 
 function AddMenu(props) {
 
-  useEffect(()=>{
-    console.log('im here')
+  const {addItem, setAddItem} = useContext(AddItemContext)
+  const {itemEdit, setItemEdit} = useContext(ItemEditContext)
 
-    return console.log('im out')
+  useEffect(()=>{
+    const bg = document.querySelectorAll('.foodMenus > *:not(.addMenu)');
+    bg.forEach(e => e.style='filter: blur(0px)')
+    if (addItem || itemEdit)  bg.forEach(e => e.style='filter: blur(5px)')
   })
 
   const cancelClk = () => {
-    const addItem = document.querySelector('.addMenu')
-    addItem.style.display = 'none'
-
+    setAddItem(false)
+    setItemEdit(false)
   }
 
-  return ( <div className="container addMenu">
+  return (itemEdit || addItem) && ( <div className="container addMenu">
+    {window.scrollTo(0,0)}
     <div className="wrapper">
       <img className='cancel' src={cancelIcon} height='25' onClick={cancelClk}/>
-      <span className="heading">Add Menu</span>
+      <span className="heading">{(itemEdit)?'Edit':'Add'} Menu</span>
       <form>
         <input required type="text" placeholder="Name" />
         <input required type="text" placeholder="Description" />
+        <input required type="text" placeholder="Category" />
         <input required type="number" placeholder="Price"/>
         <div className="isVeg">
           <input required type="checkbox" id='isVeg'/>
@@ -31,9 +37,9 @@ function AddMenu(props) {
         <input required style={{display:'none'}} type="file" id="file"/>
         <label htmlFor='file'>
           <img src={addProfilePic} height='20' className="pic"/>
-          <span>Add picture for Dish</span>
+          <span>{(itemEdit)?'Change':'Add'} picture for Dish</span>
         </label>
-        <button>Add Menu</button>
+        <button>{(itemEdit)?'Edit':'Add'} Menu</button>
       </form>
     </div>
   </div> );

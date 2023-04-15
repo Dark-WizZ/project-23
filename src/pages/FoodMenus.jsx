@@ -4,11 +4,13 @@ import plusicon from '../images/plus.png'
 import Items from '../components/Items'
 import foodItem from '../images/dummy/food.png'
 import AddMenu from '../components/AddMenu'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { AddItemContext, AddItemContextProvider} from '../context/AddItemContext';
+import { ItemEditContext } from '../context/ItemEditContext';
 
 function FoodMenus(props) {
-
-  const [addItem, setAddItem] = useState(false)
+  const {setAddItem} = useContext(AddItemContext)
+  const {setItemEdit} = useContext(ItemEditContext)
  
   const fakeMenu = [
     {
@@ -91,26 +93,28 @@ function FoodMenus(props) {
     },
   ]
 
+
   const addItemClk = () => {
-    setAddItem(addItem==true)
+    setAddItem(true)
   }
   
-  return ( <div className="foodMenus">
-    <div className="top">
-      <div className="categories">
-        <span>Categories</span>
-        <img src={arrowDownIcon} height={12}/>
+  return (
+    <div className="foodMenus">
+      <div className="top">
+        {/* <div className="categories">
+          <span>Categories</span>
+          <img src={arrowDownIcon} height={12}/>
+        </div> */}
+        <div className="addItem" onClick={addItemClk} >
+          <span>Add Item </span>
+          <img src={plusicon} height={12} />
+        </div>
       </div>
-      <div className="addItem" onClick={addItemClk} >
-        <span>Add Item </span>
-        <img src={plusicon} height={12} />
+      <div className="wrapper">
+        <Items items={JSON.stringify(fakeMenu)}/>
       </div>
-    </div>
-    <div className="wrapper">
-      <Items items={JSON.stringify(fakeMenu)}/>
-    </div>
-    <AddMenu />
-  </div> );
+      <AddMenu />
+    </div> );
 }
 
 export default FoodMenus;

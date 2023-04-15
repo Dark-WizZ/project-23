@@ -253,12 +253,13 @@ html, body, #root, .App{
         padding: 20px;
         border-radius:10px ;
         position: absolute;
-        display: none;
+        display: flex;
         justify-content: center;
         inset:0;
+        height:100%;
+        align-items: flex-start;
         
         >.wrapper{
-          position: relative;
 
           .cancel{
             position: absolute;

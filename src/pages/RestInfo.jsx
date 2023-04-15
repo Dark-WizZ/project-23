@@ -16,7 +16,7 @@ function RestInfo(props) {
           <img src={addProfilePic} height='20' className="pic"/>
           <span>Add an Logo</span>
         </label>
-        <Link to='/home'>
+        <Link to='/'>
           <button>Submit</button>
         </Link>
       </form>

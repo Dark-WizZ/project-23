@@ -8,6 +8,8 @@ import FoodMenus from './pages/FoodMenus';
 import Welcome from './components/Welcome';
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
+import { AddItemContextProvider } from './context/AddItemContext';
+import { ItemEditContextProvider } from './context/ItemEditContext';
 
 function App() {
   return (
@@ -17,7 +19,12 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/restinfo' element={<RestInfo />} />
         <Route path='/' element={<Home body={<Welcome />}/>} />
-        <Route path='/foodmenus' element={<Home body={< FoodMenus/>} />} />
+        <Route path='/foodmenus' element={<Home body={
+          <ItemEditContextProvider>
+          <AddItemContextProvider>
+            < FoodMenus/>
+          </AddItemContextProvider>
+          </ItemEditContextProvider> } />} />
         <Route path='/dashboard' element={<Home body={< Dashboard />} />} />
         <Route path='/settings' element={<Home body={< Settings />} />} />
       </Routes>
