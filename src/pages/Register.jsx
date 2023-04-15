@@ -14,14 +14,12 @@ function Register(props){
 
   const handleSubmit = async(e) => {
     setLoading(true)
-    console.log(e)
     e.preventDefault()
     const displayName = e.target[0].value
     const email = e.target[1].value
     const password = e.target[2].value
     const phoneNo = e.target[3].value
     const file = e.target[4].files[0]
-    console.log(file)
 
     try{
       //create user
@@ -32,25 +30,23 @@ function Register(props){
 
       await uploadBytesResumable(storageRef, file).then(()=>{
         getDownloadURL(storageRef).then(async url => {
-          console.log(url)
           try{
             await updateProfile(res.user, {
               displayName,
               photoURL: url,
               phoneNo
             })
-
             //create user on firebase
-            await setDoc(doc(db, 'users',res.user.id),{
-              uid: res.user.id,
+            await setDoc(doc(db, 'users',res.user.uid),{
+              uid: res.user.uid,
               displayName,
               email,
               photoURL: url,
               phoneNo
             })
             //create restaurant detail and empty menu for new user
-            // await setDoc(doc(db,'restaurants',res.user.id),{})
-            // await setDoc(doc(db, 'menus', res.user.id), {})
+            await setDoc(doc(db,'restaurants',res.user.uid),{})
+            await setDoc(doc(db, 'menus', res.user.uid), {})
             nav('/restinfo')
           }catch(error){
             console.error('error creating user data', error)
