@@ -21,6 +21,7 @@ function Register(props){
     const password = e.target[2].value
     const phoneNo = e.target[3].value
     const file = e.target[4].files[0]
+    console.log(file)
 
     try{
       //create user
@@ -31,11 +32,12 @@ function Register(props){
 
       await uploadBytesResumable(storageRef, file).then(()=>{
         getDownloadURL(storageRef).then(async url => {
+          console.log(url)
           try{
             await updateProfile(res.user, {
               displayName,
               photoURL: url,
-              // phoneNo
+              phoneNo
             })
 
             //create user on firebase
@@ -43,11 +45,11 @@ function Register(props){
               uid: res.user.id,
               displayName,
               email,
-              photoURL: getDownloadURL,
+              photoURL: url,
               phoneNo
             })
             //create restaurant detail and empty menu for new user
-            await setDoc(doc(db,'restaurants',res.user.id),{})
+            // await setDoc(doc(db,'restaurants',res.user.id),{})
             // await setDoc(doc(db, 'menus', res.user.id), {})
             nav('/restinfo')
           }catch(error){
