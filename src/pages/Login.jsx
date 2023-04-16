@@ -7,9 +7,19 @@ import {auth} from '../firebase'
 function Login(props){
   const [err, setErr] = useState(false)
   const nav = useNavigate()
-  const submitHandler = (e) => {
+
+  const submitHandler = async e => {
     e.preventDefault()
-    
+    const email = e.target[0].value
+    const password = e.target[1].value
+
+    try{
+      await signInWithEmailAndPassword(auth, email, password)
+      nav('/')
+    }catch(error){
+      console.log('error signing in: ', error)
+      setErr(true)
+    }
   }
 
   return <div className="container">

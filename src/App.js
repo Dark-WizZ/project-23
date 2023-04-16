@@ -1,17 +1,22 @@
 import './App.scss';
 import Login from './pages/Login';
 import Register from './pages/Register'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import RestInfo from './pages/RestInfo';
-import Home from './pages/home';
+import Home from './pages/Home';
 import FoodMenus from './pages/FoodMenus';
 import Welcome from './components/Welcome';
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
 import { AddItemContextProvider } from './context/AddItemContext';
 import { ItemEditContextProvider } from './context/ItemEditContext';
+import { AuthContext } from './context/AuthContext';
+import { useContext } from 'react';
 
 function App() {
+
+  const {currentUser} = useContext(AuthContext)
+
   return (
     <BrowserRouter>
       <Routes>
