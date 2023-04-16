@@ -44,8 +44,7 @@ function Register(props){
               photoURL: url,
               phoneNo
             })
-            //create restaurant detail and empty menu for new user
-            await setDoc(doc(db,'restaurants',res.user.uid),{})
+            //create empty menu for new user
             await setDoc(doc(db, 'menus', res.user.uid), {})
             nav('/restinfo')
           }catch(error){

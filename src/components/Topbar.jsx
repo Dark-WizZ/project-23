@@ -3,8 +3,13 @@ import downArrow from '../images/arrow_down.png'
 import manDP from '../images/man_dp.png'
 import {signOut} from 'firebase/auth'
 import {auth} from '../firebase'
+import {RestContext} from '../context/RestContext'
+import { useContext } from 'react'
 
 function Topbar(props) {
+
+  const {rest} = useContext(RestContext)
+
   return ( <div className="topbar">
     <img height={20} src={sideMenuIcon} />
     <span className='title'>RESTAURANT NAME</span>

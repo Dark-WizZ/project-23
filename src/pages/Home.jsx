@@ -13,12 +13,12 @@ function Home(props){
 
   useEffect(()=>{
     if(!currentUser && !authLoading){
-      nav('./login')
+      nav('/login')
     }
     if(!rest && !restLoading){
-      nav('./restinfo')
+      nav('/restinfo')
     }
-  })
+  },[currentUser, authLoading, rest, restLoading])
 
   return <div className="home">
       <Topbar />

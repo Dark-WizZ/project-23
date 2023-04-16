@@ -6,13 +6,15 @@ import {onAuthStateChanged} from 'firebase/auth'
 import {auth, storage, db} from '../firebase'
 import {doc, setDoc} from 'firebase/firestore'
 import {uploadBytesResumable, getDownloadURL, ref} from 'firebase/storage'
- 
+import { RestContext } from '../context/RestContext'; 
+
 function RestInfo(props) {
 
   const nav = useNavigate()
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState(false)
   const {currentUser, loading:authLoading} = useContext(AuthContext)
+  const {rest, loading: restLoading, setLoading: setRestLoading} = useContext(RestContext)
 
   useEffect(()=>{
     onAuthStateChanged(auth, ()=>{
@@ -21,6 +23,12 @@ function RestInfo(props) {
       }
     })
   })
+
+  useEffect(()=>{
+    if(rest && !restLoading){
+      nav('/')
+    }
+  },[rest, restLoading])
 
   const handleSubmit = async e => {
     setLoading(true)
@@ -42,9 +50,9 @@ function RestInfo(props) {
             await setDoc(doc(db, 'restaurants', currentUser.uid),{
               restName,address,city,pin,photoUrl:url
             })
-            nav('/')
+            setRestLoading(true)
           }catch(error){
-            console.log('error setting restaurant info: ', error)
+            console.error('error setting restaurant info: ', error)
             setLoading(true)
             setErr(true)
           }
@@ -75,10 +83,10 @@ function RestInfo(props) {
         </label>
         <button disabled={loading}>Submit</button>
         {loading && "Uploading image please wait..."}
+        {restLoading && "loading rest details..."}
         {err && <span>Something went wrong!</span>}
       </form>
     </div>
-
   </div>
 }
 

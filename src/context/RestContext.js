@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import {getDoc, doc} from 'firebase/firestore'
+import {getDoc, doc, onSnapshot} from 'firebase/firestore'
 import {storage, db, auth} from '../firebase'
 import { AuthContext } from "./AuthContext"
 import {onAuthStateChanged} from 'firebase/auth'
@@ -12,26 +12,20 @@ export const RestContextProvider = ({children}) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
-    const unsub = onAuthStateChanged(auth, async ()=>{
-      console.log('auth change=>',auth)
-      if (currentUser && !authLoading){
-        const d = await getDoc(doc(db, 'restaurants', currentUser.uid))
-        if(d.exists()){
-          setRest(d.data())
-        }else{
-          console.log('no such data', currentUser.uid)
-        }
-      }
-      console.log(rest)
-      setLoading(false)
-
-      return unsub
-    })
-  })
+    let unsub = () => {};
+    if (currentUser && !authLoading){
+      const docc = doc(db, 'restaurants', currentUser.uid)
+      unsub = onSnapshot(docc,(d)=>{
+        setRest(d.data())
+      })
+    }
+    setLoading(false)
+    return ()=>unsub
+  },[currentUser, authLoading, loading])
 
 
 
-  return <RestContext.Provider value={{rest, setRest}}>
+  return <RestContext.Provider value={{rest, setRest, loading, setLoading}}>
     {children}
   </RestContext.Provider>
 }

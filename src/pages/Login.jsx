@@ -17,7 +17,7 @@ function Login(props){
       await signInWithEmailAndPassword(auth, email, password)
       nav('/')
     }catch(error){
-      console.log('error signing in: ', error)
+      console.error('error signing in: ', error)
       setErr(true)
     }
   }
