@@ -12,11 +12,11 @@ function RestInfo(props) {
   const nav = useNavigate()
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState(false)
-  const {currentUser} = useContext(AuthContext)
+  const {currentUser, loading:authLoading} = useContext(AuthContext)
 
   useEffect(()=>{
     onAuthStateChanged(auth, ()=>{
-      if(!currentUser){
+      if(!currentUser && !authLoading){
         nav('/login')
       }
     })
