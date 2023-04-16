@@ -1,6 +1,6 @@
 function Dashboard(props) {
   return ( <div className="dashboard">
-    dashboard
+    Dashboard feature coming soon!
   </div> );
 }
 

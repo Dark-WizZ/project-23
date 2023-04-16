@@ -4,7 +4,7 @@ import { RestContext } from "../context/RestContext";
 
 function Body(props) {
 
-  const {currentUser} = useContext(AuthContext)
+  const {currentUser, userData} = useContext(AuthContext)
   const {rest} = useContext(RestContext)
   
   return ( <div className="welcome">
@@ -12,10 +12,16 @@ function Body(props) {
       Welcome, {currentUser.displayName}
     </div>
     <div className="logo">
-      <div className="name">
-
-      </div>
       <img src={rest.photoURL} />
+      <div className="name">
+        {rest.restName}
+      </div>
+      <div className="address">
+        {rest.address}<br />
+        {rest.city}<br />
+        {rest.pin}<br />{console.log(currentUser)}
+        ph: {userData.phoneNo}
+      </div>
     </div>
   </div> );
 }
