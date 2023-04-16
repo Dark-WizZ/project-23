@@ -94,6 +94,12 @@ html, body, #root, .App{
   grid-template-rows: auto 1fr;
   background-color: $cont_bgc;
   min-height: 100vh;
+
+  .welcome{
+    display: felx;
+    justify-content: center;
+    justify-items: center;
+  }
   
   .topbar{
     background-color: #fff;
@@ -111,6 +117,12 @@ html, body, #root, .App{
     }
     >img{
       cursor: pointer;
+    }
+    .profilePic{
+      border-radius: 50%;
+      object-fit: cover;
+      height: 25px;
+      width: 25px;
     }
   }
 

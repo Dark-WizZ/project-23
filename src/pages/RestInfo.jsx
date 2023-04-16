@@ -48,7 +48,7 @@ function RestInfo(props) {
         getDownloadURL(storageRef).then(async (url) => {
           try{
             await setDoc(doc(db, 'restaurants', currentUser.uid),{
-              restName,address,city,pin,photoUrl:url
+              restName,address,city,pin,photoURL:url
             })
             setRestLoading(true)
           }catch(error){
